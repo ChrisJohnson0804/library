@@ -7,7 +7,38 @@
 </head>
 <body>
 
+<span>
+    <button id="add" onclick="showForm()">Add New Book</button>
+</span>
 
+<form id="newBook">
+    <ul>
+        <li>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="book_title">
+        </li>
+        <li>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="book_author">
+        </li>
+        <li>
+            <label for="pageCount">Page Count:</label>
+            <input type="text" id="pageCount" name="book_pages">
+        </li>
+        <li>
+            <p>Has the book been read?</p>
+            <input type="radio" id="yes" name="book_read" value="yes">
+            <label for="yes">Yes</label>
+            <input type="radio" id="no" name="book_read" value="no">
+            <label for="no">No</label>
+        </li>
+    </ul>
+    <button type="submit">Submit</button>
+</form>
+
+<div id="container">
+
+</div>
 
     <script type="text/javascript" src="library.js"></script>
 
