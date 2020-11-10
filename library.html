@@ -12,7 +12,7 @@
     <button id="add" onclick="showForm()">Add New Book</button>
 </span>
 
-<form id="newBook">
+<form id="newBook" onsubmit="return false">
     <ul>
         <li>
             <label for="title">Title:</label>
@@ -34,7 +34,7 @@
             <label for="no">No</label>
         </li>
     </ul>
-    <button type="submit" id="addBook">Submit</button>
+    <button id="addBook">Submit</button>
 </form>
 
 <div id="container">

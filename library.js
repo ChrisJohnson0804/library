@@ -1,9 +1,10 @@
-function Book(title, author, pages, read){
+function Book(title, author, pages, read, index){
 
     this.title = title
     this.author = author
     this.pageCount = pages
     this.read = read
+    this.index = index
     this.info = function() {
         let readtext = "";
         if(read == true){
@@ -15,19 +16,36 @@ function Book(title, author, pages, read){
     }
 }
 
-const It = new Book('It', 'Stephen King', 1138, true);
-
+const It = new Book('It', 'Stephen King', 1138, true, false, 0);
 let myLibrary = [];
 let shelf = document.querySelector("#container");
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
-}
+    book.index = myLibrary.indexOf(book);
 
+}
 addBookToLibrary(It);
+
+let deleteButtons = Array.from(document.querySelectorAll('.delete'));
+console.log(deleteButtons);
+
+const setDeleteButtons = () => {
+    deleteButtons.forEach(button => {
+        if(!button.classList.contains('listening')){
+            button.classList.add('listening');
+            button.addEventListener('click', () => {
+                myLibrary.splice(parseInt(button.value), 1);
+                button.parentElement.remove();
+                refreshList();
+            });
+        }
+    });
+}
 
 const refreshList = () => {
     myLibrary.forEach(book => {
+        book.index = myLibrary.indexOf(book);
         let newBookFrame = document.createElement('div');
         shelf.appendChild(newBookFrame);
         let newBook = document.createElement('ul');
@@ -48,17 +66,34 @@ const refreshList = () => {
         } else {
             bookRead.textContent = ("Has not been read");
         }
+        let deleteButton = document.createElement('button');
+        deleteButton.textContent = "Remove Book";
+        deleteButton.setAttribute('class', 'delete');
+        deleteButton.setAttribute('value', book.index);
+        newBookFrame.appendChild(deleteButton);
+        deleteButtons.push(deleteButton);
     })
 }
 
 refreshList();
 
+
 let submitButton = document.querySelector("#addBook");
-var formData = Array.from(document.querySelector("#newBook"));
+
 submitButton.addEventListener('click', () => {
     let formData = Array.from(document.querySelector("#newBook"));
-    
-    formData.forEach()
+    let title = formData[0].value;
+    let author = formData[1].value;
+    let pageCount = formData[2].value;
+    let read = true;
+    let index = myLibrary.length;
+    if(formData[3].checked == false){
+        read = false;
+    }
+    let newBook = new Book(title, author, pageCount, read, index);
+    addBookToLibrary(newBook);
+    refreshList();
+    setDeleteButtons();
 });
 
 
