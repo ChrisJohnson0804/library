@@ -52,3 +52,13 @@ const refreshList = () => {
 }
 
 refreshList();
+
+let submitButton = document.querySelector("#addBook");
+var formData = Array.from(document.querySelector("#newBook"));
+submitButton.addEventListener('click', () => {
+    let formData = Array.from(document.querySelector("#newBook"));
+    
+    formData.forEach()
+});
+
+
