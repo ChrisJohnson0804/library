@@ -17,6 +17,10 @@ function Book(title, author, pages, read){
     }
 }
 
+let submitButton = document.querySelector("#addBook");
+let bookForm = document.querySelector('#bookFormBackground');
+bookForm.style.display = "none";
+
 const It = new Book('It', 'Stephen King', 1138, true);
 const Fake = new Book('Fake Book', 'Fake Author', 15000, false);
 let myLibrary = [];
@@ -38,7 +42,7 @@ const removeAllChildNodes = (parent) => {
 const setDeleteButton = (book, frame) => {
     book.deleteButton.addEventListener('click', () => {
         myLibrary.splice(myLibrary.indexOf(book), 1);
-        removeAllChildNodes(frame);
+        frame.remove();
     });
 }
 
@@ -58,6 +62,7 @@ const refreshList = () => {
 
         let newBookFrame = document.createElement('div');
         shelf.appendChild(newBookFrame);
+        newBookFrame.setAttribute('class', 'bookFrame');
 
         let newBook = document.createElement('ul');
         newBookFrame.appendChild(newBook);
@@ -96,7 +101,13 @@ const refreshList = () => {
 
 refreshList();
 
-let submitButton = document.querySelector("#addBook");
+const closeForm = () => {
+    bookForm.style.display = "none";
+}
+
+const openForm = () => {
+    bookForm.style.display = "block";
+}
 
 submitButton.addEventListener('click', () => {
     let formData = Array.from(document.querySelector("#newBook"));
@@ -115,6 +126,7 @@ submitButton.addEventListener('click', () => {
     let newBook = new Book(title, author, pageCount, read);
     addBookToLibrary(newBook);
     refreshList();
+    closeForm();
 });
 
 
